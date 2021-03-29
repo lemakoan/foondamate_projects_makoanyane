@@ -1,0 +1,57 @@
+body{
+    background-color: rgb(238, 238, 229);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 16px;
+    margin:0;
+    text-align: center;
+}
+
+h2 {
+    font-size: 35px;
+}
+
+input:hover {
+    background-color: yellowgreen;
+  }
+button:focus{
+    background-color: green;
+}
+
+canvas {
+    size: 40px;
+}
+
+.start{
+    display: block;
+    font-size: 25px;
+    font-weight: 700;
+    font-style: italic;
+    margin-bottom: 5px;
+    color: rgb(31, 43, 28);
+}
+
+.end{
+    display: block;
+    font-size: 25px;
+    font-weight: 700;
+    font-style: italic;
+    margin-top: 10px;
+    color:rgb(31, 43, 28);;
+}
+
+.box-1 h1{
+    background-color: #333;
+    color:#fff;
+    padding:18px;
+
+}
+
+.container{
+    width: 70%;
+    margin:auto;
+    background-color: #fff;
+    /*border: 5px rgb(218, 230, 119) solid; */
+    /* padding: 90px; */
+}
+
+

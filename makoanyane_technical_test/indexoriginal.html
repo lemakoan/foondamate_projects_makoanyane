@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <title>New Users Line Graph</title>
+  <link rel="stylesheet" type="text/css" href="./css/indexStyle.css">
+  <meta name="description" content="User access line graph"width=device-width, initial-scale=1">
+  <meta name= "author" content="Lerato Makoanyane">
+  <meta content="utf-8" http-equiv="encoding">
+  <title>The Number of New Users Accessing Foondamate Website Weekly</title>
+  <script src="./js/jquery-3.6.0.min.js"></script>
+  <script src="./js/node_modules/chart.js/dist/Chart.js"></script>
+  <script src="./js/checkDatesValid.js"></script>
+  <script src="./js/checkDateLimit.js"></script>
+  <script src="./js/createChart.js"></script>
+  <script>
+    function requestData(address) {
+      $.get(address, function(data, status){
+        if (status == "success") {
+          plotChart(data);
+          if (!checkDateLimitExist()) {
+            setDateLimitMinMax(data);
+          }
+        }
+      });
+
+    }
+  </script>
+  <script>
+    $.ajax({
+    url: "https://foondamate.com/api/v1/intern-app-new-users",
+    error: function(){
+        $("body").hide();
+        alert("No internet connection! or The Server might be down");
+
+    },
+    success: function(){
+      requestData("https://foondamate.com/api/v1/intern-app-new-users");
+
+    },
+    timeout: 3000 
+});
+  </script>
+  <script>
+  $(document).ready(function(){
+    $("button").click(function() {
+      var startDate = $("#startDate").val();
+      var endDate = $("#endDate").val();
+      var isValidDate = validDate(startDate, endDate);
+      if (!isValidDate) {
+        alert("The Start Date must be smaller than the End Date");
+      }else {
+        requestData("https://foondamate.com/api/v1/intern-app-new-users"
+        +"/"+startDate+ "/"+endDate);
+      }
+    })
+  });
+  </script>
+  </head>
+  <body>
+    <div class="box-1">
+        <h1>The Number of New Users Accessing Foondamate Website Weekly</h1>
+    </div>
+    <h2>Filter</h2>	
+    <p class="start">Start Date:<input type="date" id="startDate"></p>
+    <p class="end">End Date:  <input type="date" id="endDate">
+    <button>Submit</button></p>
+    <div class="container">
+      <canvas id="lineGraph" width="100" height="100" style="border:1px solid"></canvas>
+    </div>
+  </body>
+   <footer>
+     <p>Copyright &copy; 2021, Lerato Makoanyane</p>
+   </footer>
+</html>
